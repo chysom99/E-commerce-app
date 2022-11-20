@@ -29,7 +29,7 @@ const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ where: { email: email } });
+    const user = await User.findOne({ email: email });
 
     if (user) {
       const isSame = await bcrypt.compare(password, user.password);
