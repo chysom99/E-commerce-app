@@ -42,14 +42,33 @@ module.exports = {
   //update
   update: async (req, res) => {
     const { id } = req.params;
-    const { subject } = req.body;
+    const {
+      title,
+      description,
+      subject,
+      total_price,
+      total_quantity,
+      dimension,
+    } = req.body;
+
     if (!isValidObjectId(id))
       return res.json({ message: "Book Id is invalid" });
+    if (!title) return res.json({ message: "title is required" });
     if (!subject) return res.json({ message: "subject is required" });
+    if (!description) return res.json({ message: "description is required" });
+    if (!total_price) return res.json({ message: "total_price is required" });
+    if (!total_quantity)
+      return res.json({ message: "total_quantity is required" });
+    if (!dimension) return res.json({ message: "dimension is required" });
 
-    let book = await Book.findById(id).exec();
+    let book = await Book.findById(id);
     if (!book) return res.status(400).json({ message: "Book not found" });
+    book.title = title;
     book.subject = subject;
+    book.description = description;
+    book.total_price = total_price;
+    book.total_quantity = total_quantity;
+    book.dimension = dimension;
 
     book = await book.save();
 
@@ -61,7 +80,7 @@ module.exports = {
     const { id } = req.params;
     if (!isValidObjectId(id))
       return res.json({ message: "Book id is invalid" });
-    const book = await Book.findOneAndDelete(id).exec();
+    const book = await Book.findOneAndDelete({ _id: id }).exec();
     if (!book) return res.status(400).json({ messsage: "book not found" });
     else return res.status(200).json({ messsage: "book deleted" });
   },
