@@ -4,9 +4,7 @@ const User = require("../../models/User");
 const validateUser = async (req, res, next) => {
   try {
     const username = await User.findOne({
-      where: {
-        username: req.body.username,
-      },
+      username: req.body.username,
     });
     console.log(username);
     if (username) {
@@ -14,9 +12,7 @@ const validateUser = async (req, res, next) => {
     }
 
     const emailcheck = await User.findOne({
-      where: {
-        email: req.body.email,
-      },
+      email: req.body.email,
     });
 
     if (emailcheck) {
