@@ -1,5 +1,4 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const { ValidationError } = require("express-validation");
 
 const app = express();
@@ -9,7 +8,6 @@ require("../src/models/index");
 
 app.use(express.json({}));
 app.use(express.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
 app.use("/api/v1/", routes);
 
