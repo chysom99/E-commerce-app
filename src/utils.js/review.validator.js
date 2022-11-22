@@ -28,39 +28,5 @@ const ReviewValidation = {
         }, "ObjectID Validation"),
     }),
   },
-
-  updateReviewValidator: {
-    body: joi.object({
-      reviewText: joi.string().required(),
-      stars: joi.number().max(5).min(1),
-
-      user: joi
-        .string()
-        .required()
-        .custom((value, helper) => {
-          if (!isValidObjectId(value))
-            return helper.message("Please enter a valid user ID");
-          return value;
-        }, "ObjectID Validation"),
-
-      likes: joi
-        .string()
-        .required()
-        .custom((value, helper) => {
-          if (!isValidObjectId(value))
-            return helper.message("Please enter a valid user ID");
-          return value;
-        }, "ObjectID Validation"),
-
-      book: joi
-        .string()
-        .required()
-        .custom((value, helper) => {
-          if (!isValidObjectId(value))
-            return helper.message("Please enter a valid book ID");
-          return value;
-        }, "ObjectID Validation"),
-    }),
-  },
 };
 module.exports = ReviewValidation;
