@@ -18,8 +18,9 @@ let RentSchema = new Schema(
       type: Date,
       required: true,
     },
-    dateOfReturn: {
+    dateofReturn: {
       type: Date,
+      //required: true,
     },
     charge: {
       amount: {
@@ -33,6 +34,10 @@ let RentSchema = new Schema(
     quantity: {
       type: Number,
       default: 1,
+    },
+    isReturned: {
+      type: Boolean,
+      default: false,
     },
   },
   {
