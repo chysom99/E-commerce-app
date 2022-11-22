@@ -63,11 +63,15 @@ module.exports = {
 
     let book = await Book.findById(id);
     if (!book) return res.status(400).json({ message: "Book not found" });
+
+    let quantity = { inStock: total_quantity, rentedout: 0 };
+    let price = { dailyRental: total_price, currency: "#" };
+
     book.title = title;
     book.subject = subject;
     book.description = description;
-    book.total_price = total_price;
-    book.total_quantity = total_quantity;
+    book.price = price;
+    book.quantity = quantity;
     book.dimension = dimension;
 
     book = await book.save();
