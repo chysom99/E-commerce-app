@@ -82,24 +82,4 @@ module.exports = {
 
     res.json(rent);
   },
-
-  //most rented
-  get: async (req, res) => {
-    const pageIndex = req.query.page || 0;
-    const pageSize = req.query.pageSize || 10;
-    const rent = await Rent.aggregate([
-      {
-        $group: {
-          _id: "$book",
-          count: { $sum: "$quantity" },
-        },
-      },
-    ])
-      .limit(pageSize)
-      .skip(pageSize * pageIndex)
-      .exec();
-
-    res.json(rent);
-  },
 };
-//{ $inc: { quantity: -1 } }
