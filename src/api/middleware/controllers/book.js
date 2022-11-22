@@ -85,4 +85,17 @@ module.exports = {
 
     res.json(book);
   },
+
+  //fetch most rented book
+  get: async (req, res) => {
+    const pageIndex = req.query.page || 0;
+    const pageSize = req.query.pageSize || 10;
+    const book = await Book.find()
+      .sort({ rentedOut: -1 })
+      .limit(pageSize)
+      .skip(pageSize * pageIndex)
+      .exec();
+
+    res.json(book);
+  },
 };
