@@ -42,6 +42,7 @@ let RentSchema = new Schema(
   },
   {
     timestamps: true,
+    versionKey: false,
   }
 );
 
