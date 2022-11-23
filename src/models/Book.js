@@ -50,6 +50,7 @@ let BookSchema = new Schema(
   },
   {
     timestamps: true,
+    versionKey: false,
   }
 );
 
